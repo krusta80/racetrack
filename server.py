@@ -61,7 +61,7 @@ def run_race(racers, number_of_laps, socket):
                 print vars(racer)
                 socket.write_message(vars(racer))
                 check_for_race_completion(racers, number_of_laps)
-        threading.Timer(SENSOR_CHECK_FREQUENCY, run_race, [racers, number_of_laps, socket])
+        threading.Timer(SENSOR_CHECK_FREQUENCY, run_race, [racers, number_of_laps, socket]).start()
  
 class WSHandler(tornado.websocket.WebSocketHandler):
     def open(self):
