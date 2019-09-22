@@ -40,7 +40,6 @@
           const message = jQuery.parseJSON(evt.data);
           $("#" + (message.track_number+1) + "_" + (message.lap_times.length-2)).append(
             (message.lap_times[message.lap_times.length-1] - message.lap_times[message.lap_times.length-2]).toFixed(2));
-          };
           $("#" + (message.track_number+1) + "_total").empty().append(
             (message.lap_times[message.lap_times.length-1] - message.lap_times[0]).toFixed(2));
           };
