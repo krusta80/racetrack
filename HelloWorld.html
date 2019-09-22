@@ -69,6 +69,12 @@
             }
             ws.send(JSON.stringify(racers));
         });
+
+        // Send websocket message function
+        $("#go").click(function(evt) {
+            log("GO GO GO!!!");
+            ws.send("GO");
+        });
  
         // Send websocket message function
         $("#send").click(function(evt) {
@@ -151,6 +157,8 @@
         <option value="10">10</option>
       </select><br><br>
       <input type="submit" id="prepare" value="READY! SET!"/>
+      <br><br>
+      <input type="submit" id="go" value="GO!!!"/>
     </div><hr>
     <div id="connection_details" style="display: none">
       <label for="host">host:</label>
