@@ -40,7 +40,7 @@ def check_for_race_completion(racers, number_of_laps):
     print "number of laps is " + str(number_of_laps)
     min_lap = number_of_laps + 1
     for racer in racers:
-        print "lap times length is " + str(racer.lap_times)
+        print "lap times length is " + str(len(racer.lap_times))
         min_lap = min(min_lap, len(racer.lap_times))
     if min_lap > number_of_laps:
         FINISH_RACE = True
@@ -58,7 +58,8 @@ def run_race(racers, number_of_laps, socket):
                 print vars(racer)
                 socket.write_message(vars(racer))
                 check_for_race_completion(racers, number_of_laps)
-        threading.Timer(SENSOR_CHECK_FREQUENCY, run_race, [racers, number_of_laps, socket]).start()
+        if not FINISH_RACE:
+            threading.Timer(SENSOR_CHECK_FREQUENCY, run_race, [racers, number_of_laps, socket]).start()
  
 class WSHandler(tornado.websocket.WebSocketHandler):
     def open(self):
