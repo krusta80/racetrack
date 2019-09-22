@@ -45,7 +45,7 @@ def check_for_race_completion(racers, number_of_laps):
 def prepare_for_race(racers):
     FINISH_RACE = False
     for racer in racers:
-        racer.lap_times = []
+        setattr(racer, "lap_times", [])
 
 def run_race(racers, number_of_laps, socket):
     print 'race starting:  %s' % message
