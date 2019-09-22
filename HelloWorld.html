@@ -54,6 +54,21 @@
           $("div#message_details").show();
           log("***Connection Opened***");
         };
+
+        // Send websocket message function
+        $("#prepare").click(function(evt) {
+            log("Sending racer info...");
+            let racers = [];
+            for (let i = 1; i <= 3; i++) {
+              if ($("#track"+i) !== "NONE") {
+                racers.push({
+                  name: $("#track"+i),
+                  trackNumber: (i-1),
+                });
+              }
+            }
+            ws.send(JSON.stringify(racers));
+        });
  
         // Send websocket message function
         $("#send").click(function(evt) {
