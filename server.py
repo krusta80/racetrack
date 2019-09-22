@@ -2,6 +2,7 @@ import tornado.httpserver
 import tornado.websocket
 import tornado.ioloop
 import tornado.web
+import threading
 import socket
 import time
 import json
@@ -60,7 +61,7 @@ def run_race(racers, number_of_laps, socket):
                 print vars(racer)
                 socket.write_message(vars(racer))
                 check_for_race_completion(racers, number_of_laps)
-        time.sleep(SENSOR_CHECK_FREQUENCY)
+        threading.Timer(SENSOR_CHECK_FREQUENCY, run_race, [racers, number_of_laps, socket])
  
 class WSHandler(tornado.websocket.WebSocketHandler):
     def open(self):
