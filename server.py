@@ -51,12 +51,12 @@ def run_race(racers, number_of_laps, socket):
     print 'race starting:  %s' % message
     start_time = time.time()
     for racer in racers:
-        racer.lap_times.push(start_time)
+        racer.lap_times.append(start_time)
 
     while not FINISH_RACE:
         for racer in racers:
             if has_finished_lap(racer.track_number, racer.lap_times[-1]):
-                racer.lap_times.push(time.time())
+                racer.lap_times.append(time.time())
                 print vars(racer)
                 socket.write_message(vars(racer))
                 check_for_race_completion(racers, number_of_laps)
@@ -74,7 +74,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         else:
             self.racers = []
             for json_racer in json.loads(message, object_hook=lambda d: namedtuple('X', d.keys())(*d.values())):
-                self.racers.push(Racer(json_racer.name, json_racer.track_number))      
+                self.racers.append(Racer(json_racer.name, json_racer.track_number))      
 
         # print 'sending back message: %s' % message[::-1]
         # self.write_message(message[::-1])
