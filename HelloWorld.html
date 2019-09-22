@@ -32,9 +32,14 @@
         // Handle incoming websocket message callback
         ws.onmessage = function(evt) {
           log("Message Received: " + evt.data)
+          if (evt.data === "COMPLETE") {
+            $("#entry-form").css("display", "block");
+            $("#race-table").css("display", "default");
+            return;
+          }
           const message = jQuery.parseJSON(evt.data);
-          $("#" + (message.track_number+1) + "_" + (message.lap_times.length-1)).append(message.lap_times[message.lap_times.length-1] - message.lap_times[message.lap_times.length-2]);
-          //alert("message received: " + evt.data);
+          $("#" + (message.track_number+1) + "_" + (message.lap_times.length-2)).append(
+            (message.lap_times[message.lap_times.length-1] - message.lap_times[message.lap_times.length-2]).toFixed(2));
           };
 
         // Close Websocket callback
@@ -90,7 +95,7 @@
         $("#go").click(function(evt) {
             log("GO GO GO!!!");
             $("#entry-form").css("display", "none");
-            $("#race-table").css("display", "default");
+            $("#race-table").css("display", "block");
             ws.send("GO");
         });
 
@@ -194,7 +199,7 @@
       <input type="submit" id="go" value="GO!!!"/><br>
       <input type="submit" id="stop" value="STOP!"/>
     </div>
-    <div id="race-table">
+    <div id="race-table" style="display: none;">
       <table id="splits" style="border: 1px solid black;">
         <thead>
         </thead>
