@@ -44,6 +44,7 @@ def check_for_race_completion(racers, number_of_laps, socket):
         min_lap = min(min_lap, len(racer.lap_times))
     if min_lap > number_of_laps:
         if FINISH_RACE == False:
+            print "Race complete!"
             socket.write_message("COMPLETE")
         FINISH_RACE = True
     
