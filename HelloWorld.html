@@ -74,6 +74,8 @@
         // Send websocket message function
         $("#go").click(function(evt) {
             log("GO GO GO!!!");
+            $("#entry-form").attr("display") = 'none';
+            $("#race-table").attr("display") = 'default';
             ws.send("GO");
         });
 
@@ -95,11 +97,11 @@
  
   <body>
     <h1>Welcome to JEREP Racetrack!!</h1>
-    <img 
+    <div id="entry-form">
+      <img 
         src="https://cdn.pixabay.com/photo/2014/03/25/16/27/checker-flags-297188_1280.png"
         style="width: 100px;">
-    <div>
-      <label for="track1">Racer on track 1:</label>
+        <label for="track1">Racer on track 1:</label>
       <select id="track1">
         <option value="NONE">EMPTY</option>
         <option value="Pa">JFR (Dos)</option>
@@ -176,7 +178,10 @@
       <br><br>
       <input type="submit" id="go" value="GO!!!"/><br>
       <input type="submit" id="stop" value="STOP!"/>
-    </div><hr>
+    </div>
+    <div id="race-table" style="display: none;">
+    </div>
+    <hr>
     <div id="connection_details" style="display: none">
       <label for="host">host:</label>
       <input type="text" id="host" value="localhost" style="background:#ff0000;"/><br />
@@ -186,8 +191,6 @@
       <input type="text" id="uri" value="/ws" style="background:#ff0000;"/><br />
       <input type="submit" id="open" value="open" />
     </div>
-    <div id="terminal">
-        
-    </div>
+    <div id="terminal"></div>
   </body>
 </html>
