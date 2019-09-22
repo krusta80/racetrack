@@ -72,8 +72,9 @@ class WSHandler(tornado.websocket.WebSocketHandler):
             prepare_for_race(self.racers)
             run_race(self.racers, 3, self)
         else:
-            self.racers = json.loads(message, object_hook=lambda d: namedtuple('X', d.keys())(*d.values()))
-            print self.racers       
+            self.racers = []
+            for json_racer in json.loads(message, object_hook=lambda d: namedtuple('X', d.keys())(*d.values())):
+                self.racers.push(new Racer(json_racer.name, json_racer.track_number))      
 
         # print 'sending back message: %s' % message[::-1]
         # self.write_message(message[::-1])
