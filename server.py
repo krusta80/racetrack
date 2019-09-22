@@ -49,11 +49,6 @@ def prepare_for_race(racers):
         setattr(racer, "lap_times", [])
 
 def run_race(racers, number_of_laps, socket):
-    print 'Race starting!'
-    start_time = time.time()
-    for racer in racers:
-        racer.lap_times.append(start_time)
-
     if not FINISH_RACE:
         for racer in racers:
             if has_finished_lap(racer.track_number, racer.lap_times[-1]):
@@ -71,7 +66,10 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         print message
         if message == 'GO':
             prepare_for_race(self.racers)
-            run_race(self.racers, 3, self)
+            start_time = time.time()
+            for racer in racers:
+                racer.lap_times.append(start_time)
+            run_race(self.racers, self.number_of_laps, self)
         elif message == 'STOP':
             print "STOP CALLED!"
             FINISH_RACE = True
