@@ -71,6 +71,9 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         if message == 'GO':
             prepare_for_race(self.racers)
             run_race(self.racers, 3, self)
+        else if message == 'STOP':
+            FINISH_RACE = True
+            prepare_for_race(self.racers)
         else:
             self.racers = []
             for json_racer in json.loads(message, object_hook=lambda d: namedtuple('X', d.keys())(*d.values())):
