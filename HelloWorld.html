@@ -41,6 +41,9 @@
           $("#" + (message.track_number+1) + "_" + (message.lap_times.length-2)).append(
             (message.lap_times[message.lap_times.length-1] - message.lap_times[message.lap_times.length-2]).toFixed(2));
           };
+          $("#" + (message.track_number+1) + "_total").empty().append(
+            (message.lap_times[message.lap_times.length-1] - message.lap_times[0]).toFixed(2));
+          };
 
         // Close Websocket callback
         ws.onclose = function(evt) {
@@ -70,6 +73,7 @@
             for (let j = 0; j < $("#laps").val(); j++) {
               row += "<td style=\"border: 1px solid black;\">Lap " + (j+1) + "</td>";
             }
+            row += "<td style=\"border: 1px solid black;\">Total Time</td>";
             $("#splits thead").append(row + "</tr>");
             
             for (let i = 1; i <= 3; i++) {
@@ -83,6 +87,7 @@
                 for (let j = 0; j < $("#laps").val(); j++) {
                   row += "<td id=\"" + i + "_" + j + "\" style=\"border: 1px solid black;\"></td>";
                 }
+                row += "<td id=\"" + i + "_total" + "\" style=\"border: 1px solid black;\"></td>";
                 row += "</tr>";
                 $("#splits tbody").append(row);
               }
