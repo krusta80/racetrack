@@ -75,7 +75,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
             FINISH_RACE = True
             prepare_for_race(self.racers)
         elif "lapcount:" in message:
-            self.number_of_laps = message.split(":")[-1] 
+            self.number_of_laps = int(message.split(":")[-1])
         else:
             self.racers = []
             for json_racer in json.loads(message, object_hook=lambda d: namedtuple('X', d.keys())(*d.values())):
