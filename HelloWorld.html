@@ -32,6 +32,8 @@
         // Handle incoming websocket message callback
         ws.onmessage = function(evt) {
           log("Message Received: " + evt.data)
+          const message = jQuery.parseJSON(evt.data);
+          $("#" + message.track_number + "_" + (message.lap_times.length-1)).append(message.lap_times[lap_times.length-1] - message.lap_times[lap_times.length-2]);
           //alert("message received: " + evt.data);
           };
 
@@ -61,7 +63,7 @@
             let racers = [];
             let row = "<tr><td style=\"border: 1px solid black;\">Racer Name</td>";
             for (let j = 0; j < $("#laps").val(); j++) {
-              row += "<td>Lap " + (j+1) + "</td>";
+              row += "<td style=\"border: 1px solid black;\">Lap " + (j+1) + "</td>";
             }
             $("#splits thead").append(row + "</tr>");
             
@@ -192,7 +194,7 @@
       <input type="submit" id="go" value="GO!!!"/><br>
       <input type="submit" id="stop" value="STOP!"/>
     </div>
-    <div id="race-table">
+    <div id="race-table" style="display: none;">
       <table id="splits" style="border: 1px solid black;">
         <thead>
         </thead>
