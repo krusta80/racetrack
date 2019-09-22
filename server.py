@@ -37,6 +37,7 @@ def has_finished_lap(track_number, last_finished_time):
     return mcp.read_adc(track_number) < LIGHT_THRESHOLD and time.time() - last_finished_time > TIME_THRESHOLD
 
 def check_for_race_completion(racers, number_of_laps):
+    global FINISH_RACE
     print "number of laps is " + str(number_of_laps)
     min_lap = number_of_laps + 1
     for racer in racers:
@@ -51,6 +52,7 @@ def prepare_for_race(racers):
         setattr(racer, "lap_times", [])
 
 def run_race(racers, number_of_laps, socket):
+    global FINISH_RACE
     if not FINISH_RACE:
         for racer in racers:
             if has_finished_lap(racer.track_number, racer.lap_times[-1]):
@@ -65,6 +67,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         print 'new connection'
 
     def on_message(self, message):
+        global FINISH_RACE
         print message
         if message == 'GO':
             prepare_for_race(self.racers)
