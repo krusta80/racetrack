@@ -44,6 +44,7 @@ def check_for_race_completion(racers, number_of_laps):
         min_lap = min(min_lap, len(racer.lap_times))
     if min_lap > number_of_laps:
         FINISH_RACE = True
+    print "finish race is " + str(FINISH_RACE)
 
 def prepare_for_race(racers):
     for racer in racers:
