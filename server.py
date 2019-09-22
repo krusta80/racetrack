@@ -46,7 +46,6 @@ def check_for_race_completion(racers, number_of_laps):
         FINISH_RACE = True
 
 def prepare_for_race(racers):
-    FINISH_RACE = False
     for racer in racers:
         setattr(racer, "lap_times", [])
 
@@ -58,8 +57,7 @@ def run_race(racers, number_of_laps, socket):
                 print vars(racer)
                 socket.write_message(vars(racer))
                 check_for_race_completion(racers, number_of_laps)
-        if not FINISH_RACE:
-            threading.Timer(SENSOR_CHECK_FREQUENCY, run_race, [racers, number_of_laps, socket]).start()
+        threading.Timer(SENSOR_CHECK_FREQUENCY, run_race, [racers, number_of_laps, socket]).start()
  
 class WSHandler(tornado.websocket.WebSocketHandler):
     def open(self):
@@ -69,6 +67,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         print message
         if message == 'GO':
             prepare_for_race(self.racers)
+            FINISH_RACE = False
             start_time = time.time()
             for racer in self.racers:
                 racer.lap_times.append(start_time)
