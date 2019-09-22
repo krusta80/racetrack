@@ -59,12 +59,12 @@
         $("#prepare").click(function(evt) {
             log("Sending racer info...");
             let racers = [];
-            let table = "<table id=\"splits\">";
+            let table = "<table id=\"splits\"><thead>";
             let row = "<tr><td></td>";
             for (let j = 1; j < $("laps").val(); j++) {
               row += "<td>Lap " + (j+1) + "</td>";
             }
-            table += row + "</tr>";
+            table += row + "</tr></thead><tbody>";
             
             for (let i = 1; i <= 3; i++) {
               if ($("#track"+i).val() !== "NONE") {
@@ -80,7 +80,7 @@
                 table += row + "</tr>";
               }
             }
-            $("#race-table").append(table + "</table>");
+            $("#race-table").append(table + "</tbody></table>");
             ws.send("lapcount:" + $("#laps").val());
             ws.send(JSON.stringify(racers));
         });
