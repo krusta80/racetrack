@@ -69,6 +69,8 @@
         // Send websocket message function
         $("#prepare").click(function(evt) {
             log("Sending racer info...");
+            $("#splits thead").empty();
+            $("#splits tbody").empty();
             let racers = [];
             let row = "<tr><td style=\"border: 1px solid black;\">Racer Name</td>";
             for (let j = 0; j < $("#laps").val(); j++) {
@@ -203,7 +205,7 @@
       <input type="submit" id="prepare" value="READY! SET!"/>
       <br><br>
       <input type="submit" id="go" value="GO!!!"/><br>
-      <input type="submit" id="stop" value="STOP!"/>
+      
     </div>
     <div id="race-table" style="display: none;">
       <table id="splits" style="border: 1px solid black;">
@@ -211,7 +213,8 @@
         </thead>
         <tbody>
         </tbody>
-      </table>
+      </table><br>
+      <input type="submit" id="stop" value="STOP!"/>
     </div>
     <hr>
     <div id="connection_details" style="display: none">
