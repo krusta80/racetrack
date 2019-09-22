@@ -60,7 +60,7 @@
             log("Sending racer info...");
             let racers = [];
             let row = "<tr><td>Racer Name</td>";
-            for (let j = 0; j < $("laps").val(); j++) {
+            for (let j = 0; j < $("#laps").val(); j++) {
               row += "<td>Lap " + (j+1) + "</td>";
             }
             $("#splits thead").append(row + "</tr>");
