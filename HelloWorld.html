@@ -67,6 +67,7 @@
                 });
               }
             }
+            ws.send("lapcount:" + $("laps").val());
             ws.send(JSON.stringify(racers));
         });
 

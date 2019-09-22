@@ -61,19 +61,21 @@ def run_race(racers, number_of_laps, socket):
 class WSHandler(tornado.websocket.WebSocketHandler):
     def open(self):
         print 'new connection'
-      
+
     def on_message(self, message):
         print message
         if message == 'GO':
             prepare_for_race(self.racers)
             start_time = time.time()
-            for racer in racers:
+            for racer in self.racers:
                 racer.lap_times.append(start_time)
             run_race(self.racers, self.number_of_laps, self)
         elif message == 'STOP':
             print "STOP CALLED!"
             FINISH_RACE = True
             prepare_for_race(self.racers)
+        elif "lapcount:" in message:
+            self.number_of_laps = message.split(":")[-1] 
         else:
             self.racers = []
             for json_racer in json.loads(message, object_hook=lambda d: namedtuple('X', d.keys())(*d.values())):
