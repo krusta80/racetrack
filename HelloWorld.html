@@ -75,7 +75,7 @@
                 });
                 let row = "<tr>";
                 row += "<td style=\"border: 1px solid black;\">" + $("#track"+i).val() + "</td>";
-                for (let j = 0; j < $("laps").val(); j++) {
+                for (let j = 0; j < $("#laps").val(); j++) {
                   row += "<td id=\"" + i + "_" + j + "\" style=\"border: 1px solid black;\"></td>";
                 }
                 row += "</tr>";
