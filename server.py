@@ -72,6 +72,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
             prepare_for_race(self.racers)
             run_race(self.racers, 3, self)
         elif message == 'STOP':
+            print "STOP CALLED!"
             FINISH_RACE = True
             prepare_for_race(self.racers)
         else:
