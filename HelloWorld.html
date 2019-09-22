@@ -59,7 +59,7 @@
         $("#prepare").click(function(evt) {
             log("Sending racer info...");
             let racers = [];
-            let row = "<tr><td>Racer Name</td>";
+            let row = "<tr><td style="border: 1px solid black;">Racer Name</td>";
             for (let j = 0; j < $("#laps").val(); j++) {
               row += "<td>Lap " + (j+1) + "</td>";
             }
@@ -72,9 +72,9 @@
                   track_number: (i-1),
                 });
                 let row = "<tr>";
-                row += "<td>" + $("#track"+i).val() + "</td>";
+                row += "<td style=\"border: 1px solid black;\">" + $("#track"+i).val() + "</td>";
                 for (let j = 0; j < $("laps").val(); j++) {
-                  row += "<td id=\"" + i + "_" + j + "\"></td>";
+                  row += "<td id=\"" + i + "_" + j + "\" style=\"border: 1px solid black;\"></td>";
                 }
                 row += "</tr>";
                 $("#splits tbody").append(row);
