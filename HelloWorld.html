@@ -74,8 +74,8 @@
         // Send websocket message function
         $("#go").click(function(evt) {
             log("GO GO GO!!!");
-            $("#entry-form").attr("display") = 'none';
-            $("#race-table").attr("display") = 'default';
+            $("#entry-form").css("display", "none");
+            $("#race-table").css("display", "default");
             ws.send("GO");
         });
 
@@ -100,7 +100,7 @@
     <div id="entry-form">
       <img 
         src="https://cdn.pixabay.com/photo/2014/03/25/16/27/checker-flags-297188_1280.png"
-        style="width: 100px;">
+        style="width: 100px;"><br>
         <label for="track1">Racer on track 1:</label>
       <select id="track1">
         <option value="NONE">EMPTY</option>
