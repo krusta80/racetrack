@@ -48,7 +48,7 @@ def prepare_for_race(racers):
         setattr(racer, "lap_times", [])
 
 def run_race(racers, number_of_laps, socket):
-    print 'race starting:  %s' % message
+    print 'Race starting!'
     start_time = time.time()
     for racer in racers:
         racer.lap_times.append(start_time)
