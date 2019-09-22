@@ -60,10 +60,10 @@
             log("Sending racer info...");
             let racers = [];
             for (let i = 1; i <= 3; i++) {
-              if ($("#track"+i) !== "NONE") {
+              if ($("#track"+i).val() !== "NONE") {
                 racers.push({
                   name: $("#track"+i).val(),
-                  trackNumber: (i-1),
+                  track_number: (i-1),
                 });
               }
             }
