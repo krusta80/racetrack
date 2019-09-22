@@ -33,8 +33,10 @@
         ws.onmessage = function(evt) {
           log("Message Received: " + evt.data)
           if (evt.data === "COMPLETE") {
-            $("#entry-form").css("display", "block");
-            $("#race-table").css("display", "default");
+            setTimeout(function() {
+              $("#entry-form").css("display", "block");
+              $("#race-table").css("display", "default");
+            }, 5000);
             return;
           }
           const message = jQuery.parseJSON(evt.data);
@@ -221,6 +223,6 @@
       <input type="text" id="uri" value="/ws" style="background:#ff0000;"/><br />
       <input type="submit" id="open" value="open" />
     </div>
-    <div id="terminal"></div>
+    <div id="terminal" style="display: none;"></div>
   </body>
 </html>
