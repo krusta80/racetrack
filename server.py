@@ -51,7 +51,7 @@ def run_race(racers, number_of_laps, socket):
     for racer in racers:
         racer.lap_times.push(start_time)
 
-    while !FINISH_RACE:
+    while not FINISH_RACE:
         for racer in racers:
             if has_finished_lap(racer.track_number, racer.lap_times[-1]):
                 racer.lap_times.push(time.time())
