@@ -33,10 +33,7 @@
         ws.onmessage = function(evt) {
           log("Message Received: " + evt.data)
           if (evt.data === "COMPLETE") {
-            setTimeout(function() {
-              $("#entry-form").css("display", "block");
-              $("#race-table").css("display", "default");
-            }, 5000);
+            setTimeout(resetForm, 5000);
             return;
           }
           const message = jQuery.parseJSON(evt.data);
@@ -111,6 +108,7 @@
         $("#stop").click(function(evt) {
             log("STOPPING RACE");
             ws.send("STOP");
+            resetForm();
         });
  
         // Send websocket message function
@@ -120,6 +118,11 @@
         });
  
       });
+      
+      function resetForm() {
+        $("#entry-form").css("display", "block");
+        $("#race-table").css("display", "default");
+      }
     </script>
   </head>
  
